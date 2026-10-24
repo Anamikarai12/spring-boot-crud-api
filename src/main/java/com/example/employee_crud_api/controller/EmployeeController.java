@@ -66,6 +66,18 @@ public class EmployeeController {
 
         return ResponseEntity.ok(updatedEmployee);
     }
+    
+    //update partial 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployeePartially(
+            @PathVariable Long id,
+            @RequestBody Employee employee) {
+
+        Employee updatedEmployee =
+                employeeService.updateEmployeePartially(id, employee);
+
+        return ResponseEntity.ok(updatedEmployee);
+    }
 
     // DELETE
     @DeleteMapping("/{id}")

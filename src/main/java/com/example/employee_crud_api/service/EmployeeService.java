@@ -52,6 +52,31 @@ public class EmployeeService {
 
         return employeeRepository.save(employee);
     }
+    
+    //partial update
+    public Employee updateEmployeePartially(Long id, Employee employee) {
+
+        Employee existingEmployee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+
+        if (employee.getName() != null) {
+            existingEmployee.setName(employee.getName());
+        }
+
+        if (employee.getEmail() != null) {
+            existingEmployee.setEmail(employee.getEmail());
+        }
+        if (employee.getDepartment() != null) {
+            existingEmployee.setDepartment(employee.getDepartment());
+        }
+
+
+        if (employee.getSalary() != null) {
+            existingEmployee.setSalary(employee.getSalary());
+        }
+        
+        return employeeRepository.save(existingEmployee);
+    }
 
     // DELETE
     public void deleteEmployee(Long id) {
